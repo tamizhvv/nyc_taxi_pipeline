@@ -17,6 +17,7 @@ def transform(data):
     col('DOLocationID').cast('string')
 )))
     data=data.select('trip_id','tpep_pickup_datetime', 'tpep_dropoff_datetime', 'passenger_count', 'trip_distance', 'fare_amount', 'total_amount', 'payment_type', 'PULocationID', 'DOLocationID', 'trip_duration_minutes')
+    data = data.dropDuplicates(['trip_id'])
     after_count=data.count()
     logger.info(f"Transform completed. {after_count} clean records from {before_count} raw records.")
     return data

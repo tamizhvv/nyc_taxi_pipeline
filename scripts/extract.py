@@ -6,7 +6,7 @@ logger,run_id=logs('extract')
 
 def extract():
     logger.info('Extraction Started')
-    spark=SparkSession.builder.appName('nyc_taxi_pipeline').master('local').getOrCreate()
+    spark=SparkSession.builder.appName('nyc_taxi_pipeline').master('local').config("spark.jars", "/home/tamiz/postgresql-42.7.3.jar").getOrCreate()
     retries=config.retry
     for attempts in range(1,retries+1):
         try:
